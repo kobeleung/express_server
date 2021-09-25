@@ -1,0 +1,12 @@
+{
+    "prod": {
+        "driver": "mysql",
+        "user": "root",
+        "password": "root"
+    },
+    "dev": {
+        "driver": "mysql",
+        "user": "root",
+        "password": "root"
+    }
+}
