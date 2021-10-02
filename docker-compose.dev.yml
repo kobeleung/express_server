@@ -1,0 +1,55 @@
+version: "2"
+services:
+  node-app:
+    build: 
+      context: .
+      args: 
+          NODE_ENV: development
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm run dev
+  mongo:
+    image: mongo:latest
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes:
+      - type: bind
+        source: ./data/db/mongo
+        target: /data/db
+      
+volumes:
+  mongo-db:
+
+
+    # image: "node:14"
+    # user: "node"
+    # working_dir: /home/node/app
+    # environment:
+    #   - NODE_ENV=production
+    # volumes:
+    #   - ./myapp:/home/node/app
+    # command: "npm start"
+    # network_mode: 'host'
+  # mysqldb:
+  #       image: mysql:${MYSQL_VERSION}
+  #       container_name: ${MYSQL_HOST}
+  #       restart: always
+  #       env_file:
+  #           - ".env"
+  #       environment:
+  #           - MYSQL_DATABASE=${MYSQL_DATABASE}
+  #           - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+  #           - MYSQL_USER=${MYSQL_USER}
+  #           - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+  #           - TZ=${MYSQL_TIMEZONE}
+  #       ports:
+  #           - "8989:3306"
+  #       volumes:
+  #           - "./etc/mysql/conf.d/my-local.cnf:/etc/mysql/conf.d/my-local.cnf"
+  #           - "./data/db/mysql:/var/lib/mysql"
+  #       networks:
+  #           - default

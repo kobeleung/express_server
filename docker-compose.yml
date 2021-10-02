@@ -1,32 +1,34 @@
 version: "2"
 services:
-  node:
-    image: "node:14"
-    user: "node"
-    working_dir: /home/node/app
-    environment:
-      - NODE_ENV=production
-    volumes:
-      - ./myapp:/home/node/app
+  node-app:
+    build: .
     ports:
       - 3000:3000
-    command: "npm start"
-  mysqldb:
-        image: mysql:${MYSQL_VERSION}
-        container_name: ${MYSQL_HOST}
-        restart: always
-        env_file:
-            - ".env"
-        environment:
-            - MYSQL_DATABASE=${MYSQL_DATABASE}
-            - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-            - MYSQL_USER=${MYSQL_USER}
-            - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-            - TZ=${MYSQL_TIMEZONE}
-        ports:
-            - "8989:3306"
-        volumes:
-            - "./etc/mysql/conf.d/my-local.cnf:/etc/mysql/conf.d/my-local.cnf"
-            - "./data/db/mysql:/var/lib/mysql"
-        networks:
-            - default
+    env_file:
+      - ./.env
+    # image: "node:14"
+    # user: "node"
+    # working_dir: /home/node/app
+    # volumes:
+    #   - ./myapp:/home/node/app
+    # command: "npm start"
+    # network_mode: 'host'
+  # mysqldb:
+  #       image: mysql:${MYSQL_VERSION}
+  #       container_name: ${MYSQL_HOST}
+  #       restart: always
+  #       env_file:
+  #           - ".env"
+  #       environment:
+  #           - MYSQL_DATABASE=${MYSQL_DATABASE}
+  #           - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+  #           - MYSQL_USER=${MYSQL_USER}
+  #           - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+  #           - TZ=${MYSQL_TIMEZONE}
+  #       ports:
+  #           - "8989:3306"
+  #       volumes:
+  #           - "./etc/mysql/conf.d/my-local.cnf:/etc/mysql/conf.d/my-local.cnf"
+  #           - "./data/db/mysql:/var/lib/mysql"
+  #       networks:
+  #           - default

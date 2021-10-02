@@ -1,0 +1,38 @@
+version: "2"
+services:
+  node-app:
+    build: 
+      context: .
+      args: 
+        NODE_ENV: production
+    environment:
+      - NODE_ENV=production
+    command: node index.js
+    # image: "node:14"
+    # user: "node"
+    # working_dir: /home/node/app
+    # environment:
+    #   - NODE_ENV=production
+    # volumes:
+    #   - ./myapp:/home/node/app
+    # command: "npm start"
+    # network_mode: 'host'
+  # mysqldb:
+  #       image: mysql:${MYSQL_VERSION}
+  #       container_name: ${MYSQL_HOST}
+  #       restart: always
+  #       env_file:
+  #           - ".env"
+  #       environment:
+  #           - MYSQL_DATABASE=${MYSQL_DATABASE}
+  #           - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+  #           - MYSQL_USER=${MYSQL_USER}
+  #           - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+  #           - TZ=${MYSQL_TIMEZONE}
+  #       ports:
+  #           - "8989:3306"
+  #       volumes:
+  #           - "./etc/mysql/conf.d/my-local.cnf:/etc/mysql/conf.d/my-local.cnf"
+  #           - "./data/db/mysql:/var/lib/mysql"
+  #       networks:
+  #           - default

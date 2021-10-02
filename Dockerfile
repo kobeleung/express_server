@@ -1,21 +1,15 @@
 # specify the node base image with your desired version node:<version>
-# FROM node:14-alpine
-FROM alpine:3.7
-# replace this with your application's default port
-EXPOSE 8888
+FROM node:15
+WORKDIR /app
+COPY package.json .
 
-ARG NODE_ENV=development
-ENV NODE_ENV=${NODE_ENV}
+ARG NODE_ENV
+RUN if [ "$NODE_ENV" = "development" ]; \
+        then npm install; \
+        else npm install --only=production; \
+        fi
 
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-
-RUN npm install -g npm@latest
-RUN npm install db-migrate
-
-COPY . .
-
-RUN chmod 755 /usr/src/app
-
-CMD [ "npm", "start" ]
+COPY . ./
+ENV PORT 3000
+EXPOSE $PORT
+CMD [ "node", "index.js" ]
