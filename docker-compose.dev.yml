@@ -8,18 +8,11 @@ services:
     volumes:
       - ./:/app
       - /app/node_modules
-    environment:
-      - NODE_ENV=development
     command: npm run dev
   mongo:
-    image: mongo:latest
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=root
-    volumes:
-      - type: bind
-        source: ./data/db/mongo
-        target: /data/db
       
 volumes:
   mongo-db:

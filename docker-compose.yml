@@ -5,7 +5,18 @@ services:
     ports:
       - 3000:3000
     env_file:
-      - ./.env
+      - .env
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27018:27017
+    volumes:
+      - type: bind
+        source: ./data/db/mongo
+        target: /data/db
     # image: "node:14"
     # user: "node"
     # working_dir: /home/node/app
